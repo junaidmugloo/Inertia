@@ -9,7 +9,7 @@
 
 ## About Inertia
 
-<a href="https://inertiajs.com/">Visit website</a>
+<a href="https://inertiajs.com/">Visit website</a><br>
 <a href="https://laravel.com/docs/11.x/vite#:~:text=The%20Laravel%20Vite%20plugin%20requires,JSX%2C%20TSX%2C%20and%20Sass.">Visit Website</a>
 
 ## License

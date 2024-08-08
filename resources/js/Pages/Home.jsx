@@ -1,8 +1,9 @@
 import React from 'react'
 import Nav from '../Layouts/Nav'
  
-export default function Home() {
+export default function Home({data}) {
 
+console.log(data);
 
     return (
     <div className='container-fluid'>
@@ -20,27 +21,18 @@ export default function Home() {
         </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
+         
+          {data.map(item=>(
+         <tr>
+            <td>{item.id}</td>
             <td>Junaid</td>
-            <td role='col'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem cumque obcaecati sunt numquam quo impedit ad dolore doloremque, alias adipisci beatae repellat neque nulla, iusto quae eum laudantium dolorum expedita.</td>
+            <td role='col'>{item.body}</td>
             <td><button className='btn btn-warning btn-sm'>Edit</button></td>
             <td><button className='btn btn-danger btn-sm'>Delete</button></td>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>Junaid</td>
-            <td role='col'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem cumque obcaecati sunt numquam quo impedit ad dolore doloremque, alias adipisci beatae repellat neque nulla, iusto quae eum laudantium dolorum expedita.</td>
-            <td><button className='btn btn-warning btn-sm'>Edit</button></td>
-            <td><button className='btn btn-danger btn-sm'>Delete</button></td>
-          </tr>
-          <tr>
-            <td>1</td>
-            <td>Junaid</td>
-            <td role='col'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Autem cumque obcaecati sunt numquam quo impedit ad dolore doloremque, alias adipisci beatae repellat neque nulla, iusto quae eum laudantium dolorum expedita.</td>
-            <td><button className='btn btn-warning btn-sm'>Edit</button></td>
-            <td><button className='btn btn-danger btn-sm'>Delete</button></td>
-          </tr>
+          
+          ))}
+          
         </tbody>
        </table>
       </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class Posts extends Controller
@@ -13,7 +14,8 @@ class Posts extends Controller
      */
     public function index()
     {
-        //
+        $data = Post::all();
+        return inertia('Home',['data'=>$data]);
     }
 
     /**

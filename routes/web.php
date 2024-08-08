@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Posts;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 /*
@@ -17,7 +18,8 @@ Route::get('/', function () {
     return inertia('Home');
 });
 
-Route::get('/about', function () {
-    return Inertia::render('About',['name'=>'juniad','age'=>29]);
-});
+// Route::get('/about', function () {
+//     return Inertia::render('About',['name'=>'juniad','age'=>29]);
+// });
 
+Route::resource('/posts',Posts::class);
