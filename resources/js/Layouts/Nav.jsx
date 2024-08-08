@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react'
 import React from 'react'
 
 export default function Nav({children}) {
@@ -6,10 +7,10 @@ export default function Nav({children}) {
         <header>
         <ul>
             <li>
-                <a href="/">Home</a>
+                <Link href="/">Home</Link>
             </li>
             <li>
-                <a href="about">About</a>
+                <Link href="/about">About</Link>
             </li>
         </ul>
         </header>
