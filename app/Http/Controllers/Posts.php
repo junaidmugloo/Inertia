@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Validator;
 class Posts extends Controller
 {
     /**
@@ -19,10 +20,10 @@ class Posts extends Controller
             throw_if($data->isEmpty(), new \Exception('No posts available.'));
         } catch (\Exception $e) {
             Cache::put('error', $e->getMessage(), now()->addMinutes(5));
-            return inertia('Home', ['data'=>null, 'error' => 1]);
+            return inertia('Home', ['dataa'=>null, 'error' => 1]);
         }
         
-        return inertia('Home', ['data' => $data,'error'=>0]);
+        return inertia('Home', ['dataa' => $data,'error'=>0]);
     }
 
     /**
@@ -43,7 +44,14 @@ class Posts extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $po=$request->validate([
+            'body' => ['required'],
+          ]);
+          
+         Post::create($po);
+         return redirect()->back();
+        
+        
     }
 
     /**
@@ -86,8 +94,10 @@ class Posts extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        dd($id);
+        $post->delete();
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully.');
+
     }
 }

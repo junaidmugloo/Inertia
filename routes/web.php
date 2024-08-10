@@ -22,4 +22,5 @@ Route::get('/about', function () {
     return Inertia::render('About',['name'=>'juniad','age'=>29]);
 });
 
-Route::resource('/',Posts::class);
+// Route::resource('/',Posts::class);
+Route::resource('/posts',Posts::class);
