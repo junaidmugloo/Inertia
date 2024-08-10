@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { useForm } from '@inertiajs/react';
 
 export default function Home({ dataa, error }) {
+              // variable ,function, method, error, process
   const { data: formData, setData, post, errors, processing } = useForm({
     body: "",
   });
-
+ 
   const handleSubmit = (e) => {
     e.preventDefault();
     post('/posts', {
@@ -28,24 +29,76 @@ export default function Home({ dataa, error }) {
      
       deleteItem(`/posts/${id}`, {
         onSuccess: () => {
-          Inertia.visit('/posts');
+          // Inertia.visit('/posts');
           // Optionally, you can force a reload or redirect to ensure the list updates
-          Inertia.reload({ only: ['data'] }); // Reload the page with fresh data
+          // Inertia.reload({ only: ['data'] }); // Reload the page with fresh data
         },
         onError: (error) => {
           console.log('Deletion error:', error); // Log errors if any
         }
       });
     }
-    return false;
+   
   };
 
 
 
-console.log(errors.body);
 
   return (
     <div className='container-fluid'>
+
+
+  {/* Bootstrap Modal */}
+  <div
+                className="modal fade"
+                id="createPostModal"
+                tabIndex="-1"
+                aria-labelledby="createPostModalLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="createPostModalLabel">
+                                Update Post
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div className="modal-body">
+                            <form //</div>onSubmit={handleSubmit}
+                            >
+                                <div className="mb-3">
+                                    <label htmlFor="postBody" className="form-label">
+                                        Post Content
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="postBody"
+                                        className="form-control"
+                                        // value={formData.body}
+                                        // onChange={(e) => setFormData({ body: e.target.value })}
+                                        placeholder="Enter post content"
+                                    />
+                                </div>
+                                <button type="submit" className="btn btn-primary">
+                                    Update
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+{/* model end */}
+
+
+
       <br />
       <div className="card mt-5 p-0">
         <div className="card-body">
@@ -83,7 +136,9 @@ console.log(errors.body);
                     <td>{item.id}</td>
                     <td>Junaid</td>
                     <td>{item.body}</td>
-                    <td><button className='btn btn-warning btn-sm'>Edit</button></td>
+                    <td><button data-bs-toggle="modal"
+                data-bs-target="#createPostModal"
+                 className='btn btn-warning btn-sm'>Edit</button></td>
                     <td>
                       <form onSubmit={(e)=>handleDelete(item.id,e)}>
                       <input type="hidden" name="_method" value="delete" />
