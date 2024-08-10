@@ -22,7 +22,8 @@ export default function Home({ dataa, error }) {
 
   const { delete: deleteItem } = useForm();
 
-  const handleDelete = (id) => {
+  const handleDelete = (id,e) => {
+    e.preventDefault();
     if (window.confirm('Are you sure you want to delete this post?')) {
      
       deleteItem(`/posts/${id}`, {
@@ -36,6 +37,7 @@ export default function Home({ dataa, error }) {
         }
       });
     }
+    return false;
   };
 
 
@@ -82,7 +84,12 @@ console.log(errors.body);
                     <td>Junaid</td>
                     <td>{item.body}</td>
                     <td><button className='btn btn-warning btn-sm'>Edit</button></td>
-                    <td><button className='btn btn-danger btn-sm'  onClick={() => handleDelete(item.id)}>Delete</button></td>
+                    <td>
+                      <form onSubmit={(e)=>handleDelete(item.id,e)}>
+                      <input type="hidden" name="_method" value="delete" />
+                      <button className='btn btn-danger btn-sm' type='submit'>Delete</button>
+                      </form>
+                      </td>
                   </tr>
                 ))}
               </tbody>
