@@ -14,12 +14,12 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return inertia('Home');
-});
-
-// Route::get('/about', function () {
-//     return Inertia::render('About',['name'=>'juniad','age'=>29]);
+// Route::get('/', function () {
+//     return inertia('Home');
 // });
 
-Route::resource('/posts',Posts::class);
+Route::get('/about', function () {
+    return Inertia::render('About',['name'=>'juniad','age'=>29]);
+});
+
+Route::resource('/',Posts::class);

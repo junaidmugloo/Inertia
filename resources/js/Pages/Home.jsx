@@ -1,15 +1,18 @@
 import React from 'react'
 import Nav from '../Layouts/Nav'
  
-export default function Home({data}) {
+export default function Home({data,error}) {
 
-console.log(data);
+console.log(data,error);
 
     return (
     <div className='container-fluid'>
       <br /> 
     <div className="card mt-5 p-0">
       <div className="card-body " >
+      {!error?
+
+
        <table className='table table-striped'>
         <thead>
         <tr>
@@ -35,6 +38,8 @@ console.log(data);
           
         </tbody>
        </table>
+       : <h4 className='text-center text-danger'> No data found</h4>
+       }
       </div>
     </div>
 

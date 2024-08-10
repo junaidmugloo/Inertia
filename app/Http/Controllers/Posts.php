@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Cache;
 class Posts extends Controller
 {
     /**
@@ -14,8 +14,15 @@ class Posts extends Controller
      */
     public function index()
     {
-        $data = Post::all();
-        return inertia('Home',['data'=>$data]);
+        try {
+            $data = Post::all();
+            throw_if($data->isEmpty(), new \Exception('No posts available.'));
+        } catch (\Exception $e) {
+            Cache::put('error', $e->getMessage(), now()->addMinutes(5));
+            return inertia('Home', ['data'=>null, 'error' => 1]);
+        }
+        
+        return inertia('Home', ['data' => $data,'error'=>0]);
     }
 
     /**
